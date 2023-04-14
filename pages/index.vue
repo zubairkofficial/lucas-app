@@ -1,6 +1,6 @@
 <template>
   <div class="container mt-3">
-    <button class="btn btn-primary" v-on:click="fetchGraphql" :disabled="isLoading">{{ isLoading ? "Please wait..." : "Fetch All Users" }}</button>
+    <AppHeader :isLoading="isLoading" @onClick="getAllUsers" />
     <UsersTable :users="users" :isLoading="isLoading" />
   </div>
 </template>
@@ -10,6 +10,7 @@
 import Helpers from '../Helpers/Helpers';
 import axios from 'axios';
 import UsersTable from '../components/Users.vue';
+import AppHeader from '../components/AppHeader.vue';
 export default {
   name: 'IndexPage',
   components:{
@@ -38,7 +39,7 @@ export default {
     }
   },
   methods: {
-    async fetchGraphql(){
+    async getAllUsers(){
       this.isLoading = true;
       // Request Body: Query for GraphQL
       const requestBody = {
